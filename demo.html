@@ -1,8 +1,9 @@
-!<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Demo Page For Modifed Flower Passwords</title>
     <script type="text/javascript" src="js/lib/md5.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="js/password-gen.js"></script>
 </head>
 <body>
@@ -18,11 +19,13 @@
     </form>
     <script type="text/javascript">
         $(function () {
+            /* global PassGen */
             'use strict';
 
             $('#calculate').on('click', function (event) {
                 event.preventDefault();
-                $('#result').val(window.md5($('#input').val()));
+                var res = PassGen.getPass($('#input').val());
+                $('#result').val( res );
             });
             $('#input').val('test-string');
         });
