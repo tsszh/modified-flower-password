@@ -73,7 +73,8 @@
             return options.global.cache.defaultPasswordMode;
         },
         getPasswordMode: function(){
-            if ( isUndefined( options.local.cache.passwordMode ) ) {
+            var mode = options.local.cache.passwordMode;
+            if ( isUndefined( mode ) || (mode !== 'simple' && mode !== 'complex') ) {
                 options.local.set('passwordMode',options.getDefaultPasswordMode() );
             }
             return options.local.cache.passwordMode;

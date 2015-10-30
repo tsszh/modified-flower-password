@@ -32,8 +32,8 @@
     window.flowerPassword = {
         encrypt: function(password, key, mode) {
             myRand = randGen(parseInt($.md5(password+key),16));
-            // return getRealPass( key, 16, "complex");
-            return ''+password+' '+key+' '+mode;
+            return getRealPass( key, 16, mode);
+            // return ''+password+' '+key+' '+mode;
         }
     };
 })();

@@ -197,8 +197,8 @@ options.onReady.addListener(function() {
     };
     $('#scramble').change(onScrambleChange).keyup(onScrambleChange);
 
-    $('#password-mode').val(options.getDefaultPasswordMode() ).blur(function(){
-        options.setPasswordMode(this.value);
+    $('.password-mode').on('input change',function(e){
+        options.setPasswordMode(e.target.value);
     });
 
     $(document).on('click', '.alert .close', function() {
@@ -218,6 +218,8 @@ $.extend(messages.page.handlers, {
 
         $('#password').val('').change();
         fillKey(true);
+
+        $('.password-mode').filter(':[value='+options.getPasswordMode()+']').prop("checked",true);
     },
     focusPassword: function() {
         $('#password').focus();
