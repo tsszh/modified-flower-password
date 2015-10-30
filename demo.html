@@ -13,19 +13,49 @@
         <br>
         <button type="submit" id="calculate">Calculate</button>
         <button type="reset" id="reset">Reset</button>
+
+        <form>
+            <fieldset>
+                <legend>Password Mode</legend> 
+                <input type="radio" id="simple-mode" name="password-mode" value="simple" />
+                <label for="simple-mode">Simple</label>
+                <input type="radio" id="complex-mode" name="password-mode" value="complex" checked="checked" />
+                <label for="complex-mode">Complex</label>
+            </fieldset>
+            <fieldset>
+                <legend>Password Length</legend>
+                <input type="range" id="password-length" name="password-length" min=12 max=64 step=4 value=16/>
+                <label for="password-length" id="password-length-label">16</label>
+            </fieldset>
+        </form>
+        
+
         <h2>Result</h2>
         <input id="result">
         <br>
     </form>
     <script type="text/javascript">
+        /* global PassGen */
+        'use strict';
         $(function () {
-            /* global PassGen */
-            'use strict';
-
+            var cache = {
+                mode : 'complex',
+                length : 16
+            };
             $('#calculate').on('click', function (event) {
                 event.preventDefault();
-                var res = PassGen.getPass($('#input').val());
+                var res = PassGen.getPass($('#input').val(),cache.length,cache.mode);
                 $('#result').val( res );
+            });
+            $("input[name='password-mode']").on('change',function(e){
+                event.preventDefault();
+                cache.mode = e.target.value;
+            });
+            $('input[name="password-length"]').val(cache.length).on('input',function(e){
+                event.preventDefault();
+                var res = e.target.value;
+                $('#password-length-label').html(res);
+                cache.length = res;
             });
             $('#input').val('test-string');
         });
