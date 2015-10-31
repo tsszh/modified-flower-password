@@ -1,0 +1,3 @@
+# password-transformer
+###Introduction
+The goal of this project is to provide a simple tool to manage login passwords for different websites. PassTran will generate a random high-strength password (a combination of uppper/lower case letter, digit and symbols) based on the users' initial password, domain name and user-specific infomation. As a result, the passwords for different website and different users are guaranteed to be different even if users use the same simple password. Unlike other password management tools, PassTran doesn't store the passwords, all the passwords are calculated locally in real time.
