@@ -1,59 +1,59 @@
-(function(options, messages) {
-    $.extend(options.local, {
+(function(passTranOptions, messages) {
+    $.extend(passTranOptions.local, {
         loadAll: function() {
-            options.onReady.fireEventOnce();
+            passTranOptions.onReady.fireEventOnce();
         },
         set: function(name, value) {
-            options.local.cache[name] = value;
+            passTranOptions.local.cache[name] = value;
             messages.page.broadcast('setLocalOption', {name: name, value: value});
         }
     });
 
-    $.extend(options, {
+    $.extend(passTranOptions, {
         onReady: new OnEvent(),
 
         isCopyToClipboard: function() {
-            return options.global.cache.copyToClipboard;
+            return passTranOptions.global.cache.copyToClipboard;
         },
 
         getUserIdentifier: function(){
-            return options.global.cache.userIdentifier;
+            return passTranOptions.global.cache.userIdentifier;
         },
         setUserIdentifier: function(value){
-            return options.global.set('userIdentifier',value);
+            return passTranOptions.global.set('userIdentifier',value);
         },
 
         getUniqueKey: function(){
-            return domain+"-MyKey-"+options.global.cache.userIdentifier;
+            return domain+"-MyKey-"+passTranOptions.global.cache.userIdentifier;
         },
 
         getDefaultLength: function(){
-            return options.global.cache.defaultLength;
+            return passTranOptions.global.cache.defaultLength;
         },
         getLength: function(){
-            var len = options.local.cache.length;
+            var len = passTranOptions.local.cache.length;
             if ( isUndefined(len) ) {
-                len = options.getDefaultLength();
-                options.local.set('length',len );
+                len = passTranOptions.getDefaultLength();
+                passTranOptions.local.set('length',len );
             }
             return len;
         },
         setLength: function(value){
-            options.local.set('length',value);
+            passTranOptions.local.set('length',value);
         },
 
         getDefaultPasswordMode: function() {
-            return options.global.cache.defaultPasswordMode;
+            return passTranOptions.global.cache.defaultPasswordMode;
         },
         getPasswordMode: function(){
-            var mode = options.local.cache.passwordMode;
+            var mode = passTranOptions.local.cache.passwordMode;
             if ( isUndefined( mode ) || (mode !== 'simple' && mode !== 'complex') ) {
-                options.local.set('passwordMode',options.getDefaultPasswordMode() );
+                passTranOptions.local.set('passwordMode',passTranOptions.getDefaultPasswordMode() );
             }
-            return options.local.cache.passwordMode;
+            return passTranOptions.local.cache.passwordMode;
         },
         setPasswordMode: function(value) {
-            options.local.set('passwordMode',value);
+            passTranOptions.local.set('passwordMode',value);
         }
     });
-})(options, messages);
+})(passTranOptions, messages);

@@ -26,7 +26,7 @@ function updatePageAction(tab) {
 function notifyOptionsChanged() {
     forEachTab(function(tab) {
         chrome.pageAction.hide(tab.id);
-        messages.extension.sendTo(tab.id, 'setGlobalOptions', {value: options.global.cache});
+        messages.extension.sendTo(tab.id, 'setGlobalOptions', {value: passTranOptions.global.cache});
     });
 }
 
@@ -35,10 +35,10 @@ function setPageEnabled(tab, value) {
     var title;
     if (value) {
         icon = 'img/enabled.png';
-        title = '单击后将在本网站停用花密';
+        title = 'Click To Disable Password Transformer For This Page';
     } else {
         icon = 'img/disabled.png';
-        title = '单击后将在本网站启用花密';
+        title = 'Click To Enable Password Transformer For This Page';
     }
     chrome.pageAction.setIcon({tabId: tab.id, path: icon});
     chrome.pageAction.setTitle({tabId: tab.id, title: title});
@@ -48,10 +48,10 @@ function setPageEnabled(tab, value) {
 function attachListeners() {
     $.extend(messages.extension.handlers, {
         getGlobalOptions: function(data, reply) {
-            reply('setGlobalOptions', {value: options.global.cache});
+            reply('setGlobalOptions', {value: passTranOptions.global.cache});
         },
         setGlobalOption: function(data) {
-            options.global.set(data.name, data.value);
+            passTranOptions.global.set(data.name, data.value);
             if (data.name == 'defaultEnabled') {
                 notifyOptionsChanged();
             }
@@ -86,7 +86,7 @@ function attachListeners() {
 }
 
 function init() {
-    options.init();
+    passTranOptions.init();
     attachListeners();
     showAllPageActions();
 }

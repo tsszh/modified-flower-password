@@ -3,7 +3,7 @@
 
 (function() {
     var symbolPool = '!@#$%^&*-+=/',
-        simplePool = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+        simplePool = 'abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ0123456789',
         comlexPool = simplePool+symbolPool;
     var myRand = function(){console.error("This Method Should Nerver Be Called!!");return 0;};
     var getRealPass = function( key, len, mode ){

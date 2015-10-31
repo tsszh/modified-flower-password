@@ -1,6 +1,6 @@
-var options = {
+var passTranOptions = {
     onInit: new OnEvent(),
     init: function() {
-        options.onInit.fireEvent();
+        passTranOptions.onInit.fireEvent();
     }
 };

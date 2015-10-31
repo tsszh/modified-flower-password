@@ -4,9 +4,9 @@
 
 */
 
-/* global options, console */
+/* global passTranOptions, console */
 'use strict';
-(function(options) {
+(function(passTranOptions) {
     var cache = {
         copyToClipboard: false,
         defaultEnabled: true,
@@ -15,7 +15,7 @@
         defaultLength: 16
     };
 
-    options.global = {
+    passTranOptions.global = {
         cache: cache,
 
         loadAll: function() {
@@ -23,14 +23,14 @@
                 for (var name in cache) {
                     var value = localStorage.getItem(name);
                     if (value === null) {
-                        options.global.set(name, cache[name]);
+                        passTranOptions.global.set(name, cache[name]);
                     } else {
                         cache[name] = JSON.parse(value);
                     }
                 }
             } catch (e) {
                 console.log(e);
-                options.accessLocalStorageFailed = true;
+                passTranOptions.accessLocalStorageFailed = true;
             }
         },
         set: function(name, value) {
@@ -39,12 +39,12 @@
                 localStorage.setItem(name, JSON.stringify(value));
             } catch (e) {
                 console.log(e);
-                options.accessLocalStorageFailed = true;
+                passTranOptions.accessLocalStorageFailed = true;
             }
         }
     };
 
-    options.onInit.addListener(function() {
-        options.global.loadAll();
+    passTranOptions.onInit.addListener(function() {
+        passTranOptions.global.loadAll();
     });
-})(options);
+})(passTranOptions);

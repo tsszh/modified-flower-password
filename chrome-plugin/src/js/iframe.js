@@ -18,8 +18,8 @@ function adjustIframeSize(locate) {
     messages.page.sendToTop('setIframeSize', {width: width, height: height, locate: locate});
 }
 
-options.onReady.addListener(function() {
-    if (options.accessLocalStorageFailed) {
+passTranOptions.onReady.addListener(function() {
+    if (passTranOptions.accessLocalStorageFailed) {
         $('.extension-id').html(chrome.i18n.getMessage("@@extension_id"));
         $('#write-local-storage-failed').show();
     }
@@ -54,15 +54,15 @@ options.onReady.addListener(function() {
 
     $('#password').blur(function() {
         var password = $("#password").val(),
-            key = options.getUniqueKey(),
-            mode = options.getPasswordMode(),
-            length = options.getLength();
+            key = passTranOptions.getUniqueKey(),
+            mode = passTranOptions.getPasswordMode(),
+            length = passTranOptions.getLength();
 
         var result = flowerPassword.encrypt(password, key, mode, length);
         console.log(result);
         if (result) {
             messages.page.broadcast('setCurrentFieldValue', {value: result});
-            if (options.isCopyToClipboard()) {
+            if (passTranOptions.isCopyToClipboard()) {
                 messages.extension.send('copyToClipboard', {value: result});
             }
         }
@@ -73,12 +73,12 @@ options.onReady.addListener(function() {
     });
 
     $('#length').on('input change',function(){
-        options.setLength(parseInt(this.value));
+        passTranOptions.setLength(parseInt(this.value));
         $('#length-show').html(this.value);
     });
 
     $('.password-mode').on('input change',function(e){
-        options.setPasswordMode(e.target.value);
+        passTranOptions.setPasswordMode(e.target.value);
     });
 
     $(document).on('click', '.alert .close', function() {
@@ -91,16 +91,16 @@ options.onReady.addListener(function() {
 $.extend(messages.page.handlers, {
     /* Setup The Iframe */
     setupIframe: function(data) {
-        options.local.cache = data.options;
+        passTranOptions.local.cache = data.passTranOptions;
         domain = data.domain;
 
         $('#password').val('').change();
 
-        var len = options.getLength();
+        var len = passTranOptions.getLength();
         $('#length').val(len);
         $('#length-show').html(len);
 
-        $('.password-mode').filter(':[value='+options.getPasswordMode()+']').prop("checked",true);
+        $('.password-mode').filter(':[value='+passTranOptions.getPasswordMode()+']').prop("checked",true);
     },
     focusPassword: function() {
         $('#password').focus();
@@ -108,7 +108,7 @@ $.extend(messages.page.handlers, {
 });
 
 $(window).ready(function() {
-    options.init();
+    passTranOptions.init();
 }).load(function() {
     adjustIframeSize(true);
 });

@@ -8,7 +8,7 @@ var events = {
 var showIframe, closeIframe, focusIframe, locateIframe;
 
 function setupListeners() {
-    if (options.isEnabled()) {
+    if (passTranOptions.isEnabled()) {
         $(document).on('focus.fp', 'input:password', function() {
             events.onFocusInPassword.fireEvent(this);
         })
@@ -34,7 +34,7 @@ function setupListeners() {
 
 events.onFocusInPassword.addListener(function(field) {
     if (!current.field || current.field[0] !== field) {
-        messages.page.broadcast('setupIframe', {options: options.local.cache, domain: $.getDomain()});
+        messages.page.broadcast('setupIframe', {passTranOptions: passTranOptions.local.cache, domain: $.getDomain()});
     }
     current.field = $(field);
 });
@@ -107,24 +107,24 @@ if (isTopWindow()) {
                 return;
             }
             $('body').append('<iframe id="flower-password-iframe" src="' + getURL('iframe.html') + '" style="display: none;"></iframe>');
-            if (options.isTransparent()) {
+            if (passTranOptions.isTransparent()) {
                 $('#flower-password-iframe').addClass('transparent');
             }
         }
 
-        options.onIframeReady.addListener(setupListeners);
-        options.onReady.addListener(function() {
+        passTranOptions.onIframeReady.addListener(setupListeners);
+        passTranOptions.onReady.addListener(function() {
             injectIframe();
         });
-        options.onSetEnabled.addListener(function() {
-            if (!options.isEnabled()) {
+        passTranOptions.onSetEnabled.addListener(function() {
+            if (!passTranOptions.isEnabled()) {
                 closeIframe();
             }
         });
 
         $.extend(messages.page.handlers, {
             iframeReady: function() {
-                options.onIframeReady.fireEventOnce();
+                passTranOptions.onIframeReady.fireEventOnce();
             },
             closeIframe: function(data) {
                 closeIframe(data.focusCurrentField);
@@ -220,7 +220,7 @@ if (isIframe()) {
         }
     });
 
-    options.onSetEnabled.addListener(setupListeners);
+    passTranOptions.onSetEnabled.addListener(setupListeners);
 
     function injectPageScript() {
         var script = document.createElement('script');
@@ -230,5 +230,5 @@ if (isIframe()) {
     }
     injectPageScript();
 
-    options.init();
+    passTranOptions.init();
 })();

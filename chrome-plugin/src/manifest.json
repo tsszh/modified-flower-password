@@ -1,8 +1,8 @@
 {
-  "name": "Flower Password",
-  "version": "2.0.2",
+  "name": "Password Transformer",
+  "version": "1.0.0",
   "manifest_version": 2,
-  "description": "花密 Flower Password --- 可记忆的密码管理方案",
+  "description": "Convert easy-to-remember passwords into unbreakable strong passwords.",
   "icons": {
     "16": "img/icon16.png",
     "48": "img/icon48.png",

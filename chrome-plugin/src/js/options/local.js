@@ -1,4 +1,4 @@
-(function(options) {
+(function(passTranOptions) {
     var cache = {
         enabled: undefined,
         passwordMode : undefined,
@@ -6,7 +6,7 @@
     };
 
     function saveStorage(name, value) {
-        var key = 'flower-password-' + name;
+        var key = 'password-transformer-' + name;
         try {
             if (!isUndefined(value)) {
                 localStorage.setItem(key, JSON.stringify(value));
@@ -19,13 +19,13 @@
     }
 
     function loadStorage(name) {
-        var key = 'flower-password-' + name;
+        var key = 'password-transformer-' + name;
         var value = localStorage.getItem(key);
         if (value !== null) value = JSON.parse(value);
         return value;
     }
 
-    options.local = {
+    passTranOptions.local = {
         cache: cache,
 
         loadAll: function() {
@@ -46,7 +46,7 @@
         }
     };
 
-    options.onInit.addListener(function() {
-        options.local.loadAll();
+    passTranOptions.onInit.addListener(function() {
+        passTranOptions.local.loadAll();
     });
-})(options);
+})(passTranOptions);

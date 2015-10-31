@@ -1,99 +1,99 @@
-(function(options, messages) {
+(function(passTranOptions, messages) {
     if (isTopWindow()) {
-        $.extend(options.global, {
+        $.extend(passTranOptions.global, {
             setCache: function(value) {
                 if (!isUndefined(value)) {
-                    options.global.cache = value;
-                    options.onReady.fireEventOnce();
+                    passTranOptions.global.cache = value;
+                    passTranOptions.onReady.fireEventOnce();
                 }
             },
             loadAll: function() {
                 messages.extension.send('getGlobalOptions');
             },
             set: function(name, value) {
-                options.global.cache[name] = value;
+                passTranOptions.global.cache[name] = value;
                 messages.extension.send('setGlobalOption', {name: name, value: value});
             }
         });
 
-        $.extend(options, {
+        $.extend(passTranOptions, {
             onReady: new OnEvent(),
             onIframeReady: new OnEvent(),
 
             isTransparent: function() {
-                return options.global.cache.transparent;
+                return passTranOptions.global.cache.transparent;
             },
 
             onSetEnabled: new OnEvent(),
             isDefaultEnabled: function() {
-                return options.global.cache.defaultEnabled;
+                return passTranOptions.global.cache.defaultEnabled;
             },
             isEnabled: function() {
-                if (isUndefined(options.local.cache.enabled)) {
-                    return options.isDefaultEnabled();
+                if (isUndefined(passTranOptions.local.cache.enabled)) {
+                    return passTranOptions.isDefaultEnabled();
                 } else {
-                    return options.local.cache.enabled;
+                    return passTranOptions.local.cache.enabled;
                 }
             },
             setEnabled: function(value) {
-                options.local.set('enabled', value);
-                options.onSetEnabled.fireEvent();
+                passTranOptions.local.set('enabled', value);
+                passTranOptions.onSetEnabled.fireEvent();
             },
             toggleEnabled: function() {
-                options.setEnabled(!options.isEnabled());
+                passTranOptions.setEnabled(!passTranOptions.isEnabled());
             }
         });
-        options.onIframeReady.addListener(function() {
-            messages.page.broadcast('setLocalEnabled', {value: options.isEnabled()});
+        passTranOptions.onIframeReady.addListener(function() {
+            messages.page.broadcast('setLocalEnabled', {value: passTranOptions.isEnabled()});
         });
 
         $.extend(messages.extension.handlers, {
             toggleLocalEnabled: function() {
-                options.toggleEnabled();
-                messages.all.broadcast('setLocalEnabled', {value: options.isEnabled()});
+                passTranOptions.toggleEnabled();
+                messages.all.broadcast('setLocalEnabled', {value: passTranOptions.isEnabled()});
             },
             getLocalEnabled: function(data, reply) {
-                reply('setLocalEnabled', {value: options.isEnabled()});
+                reply('setLocalEnabled', {value: passTranOptions.isEnabled()});
             },
             setGlobalOptions: function(data) {
-                options.global.setCache(data.value);
-                messages.extension.send('setLocalEnabled', {value: options.isEnabled()});
+                passTranOptions.global.setCache(data.value);
+                messages.extension.send('setLocalEnabled', {value: passTranOptions.isEnabled()});
             }
         });
 
         $.extend(messages.page.handlers, {
             getLocalEnabled: function(data, reply) {
-                if (options.onIframeReady.fired) {
-                    reply('setLocalEnabled', {value: options.isEnabled()});
+                if (passTranOptions.onIframeReady.fired) {
+                    reply('setLocalEnabled', {value: passTranOptions.isEnabled()});
                 }
             }
         });
     } // endif (isTopWindow())
 
     if (isIframe()) {
-        $.extend(options.global, {
+        $.extend(passTranOptions.global, {
             loadAll: function() {},
             set: function() {}
         });
 
-        $.extend(options, {
+        $.extend(passTranOptions, {
             onSetEnabled: new OnEvent(),
             isEnabled: function() {
-                return options.local.cache.enabled;
+                return passTranOptions.local.cache.enabled;
             },
             setEnabled: function(value) {
-                options.local.cache.enabled = value;
-                options.onSetEnabled.fireEvent();
+                passTranOptions.local.cache.enabled = value;
+                passTranOptions.onSetEnabled.fireEvent();
             }
         });
 
         $.extend(messages.page.handlers, {
             setLocalEnabled: function(data) {
-                options.setEnabled(data.value);
+                passTranOptions.setEnabled(data.value);
             }
         });
 
-        options.onInit.addListener(function() {
+        passTranOptions.onInit.addListener(function() {
             messages.page.sendToTop('getLocalEnabled');
         });
     } // endif (isIframe())
@@ -102,8 +102,8 @@
     $.extend(messages.page.handlers, {
         setLocalOption: function(data) {
             if (current.field) {
-                options.local.set(data.name, data.value);
+                passTranOptions.local.set(data.name, data.value);
             }
         }
     });
-})(options, messages);
+})(passTranOptions, messages);

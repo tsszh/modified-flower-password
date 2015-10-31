@@ -18,7 +18,7 @@
             win.parent.postMessage(e.data, '*');
         },
         bubbleMessage: function(e) {
-            var iframeElement = findIframe(e.source);
+            variframeElement = findIframe(e.source);
             if (iframeElement) {
                 var box = iframeElement.getBoundingClientRect();
                 var padding = getPadding(iframeElement);

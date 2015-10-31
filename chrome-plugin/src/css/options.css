@@ -1,3 +1,14 @@
+/*
+
+        Layout
+
+*/
+*, *::before, *::after {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   text-align: center;
 }
@@ -27,7 +38,7 @@ header h1 {
 }
 
 p {
-  font-size: 12px;
+  font-size: 16px;
   font-family: inherit;
   color: #999;
   margin-bottom: 18px;
@@ -43,4 +54,83 @@ footer {
   border-top: 2px solid #08C;
   padding: 5px 0 0;
   width: 540px;
+}
+
+
+.form-horizontal {
+  margin: 20px 0;
+  padding: 0 10px;
+}
+.form-horizontal .control-group {
+  margin: 15px 0;
+  height: 30px;
+}
+.form-horizontal .control-label {
+  display: inline-block;
+  width: 30%;
+  height: 100%;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: left;
+  vertical-align: top;
+  color: #1A1B1F;
+}
+
+.form-horizontal .controls {
+  width: 65%; height: 100%;
+  display: inline-block;
+  margin-left: 0;
+}
+
+
+/*
+
+        Style
+
+*/
+body {
+  font: 14px/30px Tahoma, Helvetica, Arial, \5b8b\4f53;
+  color: #000;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+input {
+  font-size: 14px;
+  font-family: inherit;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.checkbox {
+  padding-left: 10px;
+}
+
+.checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: -2px 20px 0 0;
+  border: 1px solid black;
+  border-radius: 3px;
+  -webkit-appearance: none;
+  vertical-align: middle;
+}
+
+.checkbox input[type="checkbox"]:checked:after {
+  content: url(../img/checkmark.png);
+  position: relative;
+  top: 0; left: 1px;
+}
+
+.controls .password-mode {
+  display: inline-block;
+  margin: auto 20px;
+}
+.controls .password-mode:first-of-type {
+  margin-left: 0;
 }
