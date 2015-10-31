@@ -1,9 +1,8 @@
 (function(options) {
     var cache = {
         enabled: undefined,
-        appendScramble: undefined,
-        lastKey: undefined,
-        passwordMode : undefined
+        passwordMode : undefined,
+        length : undefined
     };
 
     function saveStorage(name, value) {

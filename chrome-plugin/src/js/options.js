@@ -8,32 +8,16 @@ $(function() {
     $('#default-enabled').prop("checked", options.global.cache.defaultEnabled).change(function() {
         options.global.set('defaultEnabled', this.checked);
     });
-    $('#password-strength').prop("checked", options.global.cache.checkPasswordStrength).change(function() {
-        options.global.set('checkPasswordStrength', this.checked);
-    });
-    $('#transparent').prop("checked", options.global.cache.transparent).change(function() {
-        options.global.set('transparent', this.checked);
-    });
     $('#copy-to-clipboard').prop("checked", options.global.cache.copyToClipboard).change(function() {
         options.global.set('copyToClipboard', this.checked);
     });
-    $('#last-key').prop("checked", options.global.cache.saveLastKey).change(function() {
-        options.global.set('saveLastKey', this.checked);
+    $('#user-identifier').val(options.global.cache.userIdentifier).on('blur keyup', function(){
+        options.global.set('userIdentifier',this.value);
     });
-    $('#fill-key').prop("checked", options.global.cache.fillKeyWithDomain).change(function() {
-        options.global.set('fillKeyWithDomain', this.checked);
+    $('#length').val(options.global.cache.defaultLength).on('change input',function(){
+        options.global.set('defaultLength',parseInt(this.value));
     });
-    $('#append-scramble').prop("checked", options.global.cache.defaultAppendScramble).change(function() {
-        options.global.set('defaultAppendScramble', this.checked);
-    });
-    $('#scramble').val(options.global.cache.scramble).change(function() {
-        options.global.set('scramble', this.value);
-    }).keyup(function() {
-        $(this).change();
-    });
-    $('#password-mode').val(options.global.cache.defaultPasswordMode).change(function() {
+    $('.password-mode').change(function() {
         options.global.set('defaultPasswordMode',this.value);
-    }).keyup(function() {
-        $(this).change();
-    });
+    }).filter(':[value='+options.global.cache.defaultPasswordMode+']').prop("checked",true);
 });

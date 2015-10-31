@@ -30,10 +30,10 @@
         };
     };
     window.flowerPassword = {
-        encrypt: function(password, key, mode) {
+        encrypt: function(password, key, mode, length) {
             myRand = randGen(parseInt($.md5(password+key),16));
-            return getRealPass( key, 16, mode);
-            // return ''+password+' '+key+' '+mode;
+            return getRealPass( key, length, mode);
+            // return ''+password+' '+key+' '+mode+' '+length;
         }
     };
 })();

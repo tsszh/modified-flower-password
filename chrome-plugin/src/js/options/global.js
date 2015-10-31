@@ -8,15 +8,11 @@
 'use strict';
 (function(options) {
     var cache = {
-        checkPasswordStrength: false,
-        transparent: false,
         copyToClipboard: false,
-        saveLastKey: true,
-        fillKeyWithDomain: true,
         defaultEnabled: true,
-        defaultAppendScramble: true,
-        scramble: '',
-        defaultPasswordMode: 'complex'
+        userIdentifier: 'Please change this message.',
+        defaultPasswordMode: 'complex',
+        defaultLength: 16
     };
 
     options.global = {

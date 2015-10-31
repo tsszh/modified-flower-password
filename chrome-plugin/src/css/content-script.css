@@ -8,10 +8,10 @@
   z-index: 999999999;
 }
 
-#flower-password-iframe.transparent {
+/*#flower-password-iframe.transparent {
   opacity: 0.5;
 }
 
 #flower-password-iframe.transparent:hover, #flower-password-iframe.transparent.nontransparent {
   opacity: 1.0;
-}
+}*/

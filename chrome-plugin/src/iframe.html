@@ -2,8 +2,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/bootstrap.css" />
-<link rel="stylesheet" href="css/custom.css" />
 <link rel="stylesheet" href="css/iframe.css" />
 <script type="text/javascript" src="js/libs/jquery.js"></script>
 <script type="text/javascript" src="js/libs/md5.js"></script>
@@ -18,11 +16,11 @@
 </head>
 <body>
 <div id="main">
-	<span id="close" title="关闭 (全局：Alt+W，本窗口内：Enter或Esc)">关闭</span>
-	<header>Flower Password</header>
+	<span id="close" title="关闭 (全局：Alt+W，本窗口内：Enter或Esc)"></span>
+	<header>Password Transformer</header>
+	<hr/>
 	<fieldset class="form-horizontal">
-		<div id="write-local-storage-failed" class="alert" style="display: none;">
-			<a class="close">&times;</a>
+		<div id="write-local-storage-failed" class="alert" style="display:none;">
 			<div class="content">
 				<p>　您可能设置了“阻止网站设置任何数据”或“阻止第三方 Cookie 和网站数据”，这将导致花密无法保存设置。</p>
 				<p>　请您在Chrome设置中，打开“高级选项-&gt;内容设置-&gt;Cookie-&gt;管理例外情况”，添加“<span class="extension-id"></span>”，并将该项设置为“允许”。</p>
@@ -30,35 +28,23 @@
 		</div>
 		<div class="control-group first">
 			<label class="control-label" for="password">
-				<span class="help" title="Easy-To-Remember Password">Password</span>
-			</label>
-			<div class="controls"><input id="password" type="password" value="" placeholder="ShortCut：Alt+S" /></div>
+				<span>Password</span>
+			</label><!--
+			--><div class="controls"><input id="password" type="password" value="" placeholder="ShortCut：Alt+S" /></div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="key">
-				<span class="help" title="Identify Different Website And Different Person">Code</span>
-			</label>
-			<div class="controls"><input id="key" type="text" value="" /></div>
-		</div>
-		<div class="control-group" title="对所有网站有效">
-			<label class="checkbox"><input id="fill-key" type="checkbox" />默认将网站域名填入区分代号</label>
-		</div>
-		<div class="control-group" title="只对本网站有效">
-			<label class="checkbox"><input id="append-scramble" type="checkbox" />在默认区分代号后加上<span class="help" title="添加到默认填入的区分代号后面，用于提高默认区分代号的强度，可适当加入分隔符，如“.abc”或“#abc”">附加扰码</span></label>
-		</div>
-		<div class="control-group" id="scramble-field" style="display: none;">
-			<label class="control-label" for="scramble">
-				<span class="help" title="添加到默认填入的区分代号后面，用于提高默认区分代号的强度，可适当加入分隔符，如“.abc”或“#abc”">附加扰码</span>
-			</label>
-			<div class="controls"><input id="scramble" type="text" value="" /></div>
+			<label class="control-label" for="length">Length</label><!--
+			--><div class="controls"><input id="length" type="range" value="" min=12 max=36 step=4 /><span id="length-show">16</span></div>
 		</div>
 		<div class="control-group" id="password-mode-field">
 			<label class="control-label" for="password-mode">
-				<span class="help" title="">Mode</span>
-			</label>
-			<div class="controls">
-				<input class="password-mode" name="password-mode" type="radio" value="simple" />
-				<input class="password-mode" name="password-mode" type="radio" value="complex" />
+				<span>Mode</span>
+			</label><!--
+			--><div class="controls" id="password-mode">
+
+				<label><input class="password-mode" id="password-mode-simple" name="password-mode" type="radio" value="simple" />Simple</label><!--
+				
+				--><label><input class="password-mode" id="password-mode-complex" name="password-mode" type="radio" value="complex" />Complex</label>
 			</div>
 		</div>
 	</fieldset>
